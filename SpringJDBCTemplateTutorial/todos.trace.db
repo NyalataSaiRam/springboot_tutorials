@@ -1,0 +1,6 @@
+2025-12-09 14:29:19.080878+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TASK" not found; SQL statement:
+insert into tasks (name, completed) values (?, ?) [42102-240]
+2025-12-09 14:30:48.458657+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TASK" not found; SQL statement:
+insert into task (name, completed) values (?, ?) [42102-240]
