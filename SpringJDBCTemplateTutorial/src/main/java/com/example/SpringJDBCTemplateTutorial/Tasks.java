@@ -1,4 +1,4 @@
-package com.example.SpringJDBCTemplateTutorial;
+package com.example.SpringJDBCTemplateTutorial.JDBC_Template;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
