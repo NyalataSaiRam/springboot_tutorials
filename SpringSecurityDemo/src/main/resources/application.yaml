@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: SpringSecurityDemo
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice
+    username: postgres
+    password: root
+
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+# spring security config
