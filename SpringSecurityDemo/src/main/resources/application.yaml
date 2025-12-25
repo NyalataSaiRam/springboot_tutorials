@@ -4,7 +4,7 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/practice
+    url: jdbc:postgresql://localhost:5432/authentication
     username: postgres
     password: root
 
@@ -16,4 +16,16 @@ spring:
       hibernate:
         format_sql: true
 
-# spring security config
+#  security:
+#    user:
+#      name: sairam
+#      password: 12345
+
+
+server:
+  servlet:
+    context-path: /api/v1
+
+
+jwt:
+  secret: Tp2ZXcxJYA9nxNBgPXBtejP2kVB3HQjzKZ0M10TnDhIT64e2kf6xrgO9Tgl

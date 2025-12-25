@@ -1,9 +1,8 @@
-package com.example.SpringSecurityDemo.model;
+package com.example.SpringSecurityDemo.models;
 
-import com.example.SpringSecurityDemo.model.types.Role;
+import com.example.SpringSecurityDemo.models.types.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,28 +13,25 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class UserPrincipal implements UserDetails {
 
     @Id
     @GeneratedValue
     private Long id;
-
     private String username;
-
     private String password;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Role role;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+role.name()));
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

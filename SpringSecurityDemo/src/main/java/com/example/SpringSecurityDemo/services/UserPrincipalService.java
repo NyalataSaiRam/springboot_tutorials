@@ -1,40 +1,36 @@
 package com.example.SpringSecurityDemo.services;
 
-import com.example.SpringSecurityDemo.dtos.UserPrincipalRequestDTO;
-import com.example.SpringSecurityDemo.model.UserPrincipal;
-import com.example.SpringSecurityDemo.model.types.Role;
-import com.example.SpringSecurityDemo.repositories.UserPrincipalRepository;
+import com.example.SpringSecurityDemo.dto.AuthRequestDto;
+import com.example.SpringSecurityDemo.models.UserPrincipal;
+import com.example.SpringSecurityDemo.models.types.Role;
+import com.example.SpringSecurityDemo.repositories.UserPrincipalRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserPrincipalService {
 
-    private final UserPrincipalRepository userRepo;
+    private final UserPrincipalRepo userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
-    public void register(UserPrincipalRequestDTO user) throws Exception {
-        if(userRepo.existsByUsername(user.getUsername())) throw new Exception("Username already exists");
-        userRepo.save(
-                UserPrincipal.builder()
-                    .username(user.getUsername())
-                    .password(
-                            encoder.encode(user.getPassword())
-                    ).role(Role.USER).build()
+    public UserPrincipal getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow();
+    }
+
+    public void saveUser(AuthRequestDto authRequestDto) {
+        UserPrincipal newUser = UserPrincipal.builder()
+                .username(authRequestDto.getUsername())
+                .password(
+                        passwordEncoder.encode(authRequestDto.getPassword())
+                )
+                .role(Role.USER)
+                .build();
+        userRepository.save(
+                newUser
         );
     }
-
-    public List<UserPrincipal> getAll(){
-        return userRepo.findAll();
-    }
-
-
-
-
-
 }
