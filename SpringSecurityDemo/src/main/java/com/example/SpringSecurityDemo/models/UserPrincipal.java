@@ -21,6 +21,8 @@ public class UserPrincipal implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(unique = true)
     private String username;
     private String password;
 
